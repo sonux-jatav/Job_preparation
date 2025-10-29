@@ -51,20 +51,7 @@ Job_preparation/
 * Problem link + solution
 * Explanation and notes
 
-## 📸 Screenshots
-
-> Here are example placeholders — replace them with your actual screenshots
-
-| DSA Folder View                     | Aptitude Notes                                |
-| ----------------------------------- | --------------------------------------------- |
-| ![DSA Screenshot](./assets/dsa.png) | ![Aptitude Screenshot](./assets/aptitude.png) |
-
-| Notes Section                           | Daily Commit History                        |
-| --------------------------------------- | ------------------------------------------- |
-| ![Notes Screenshot](./assets/notes.png) | ![Commits Screenshot](./assets/commits.png) |
-
-> Place your screenshot files in an `assets/` folder and rename the above links accordingly.
-
+* 
 ## 🤝 Contributions
 
 This repo is mainly for personal tracking, but feel free to:
