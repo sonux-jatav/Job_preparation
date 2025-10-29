@@ -1,37 +1,91 @@
-# AI-Powered Interview Prep
+# Job Preparation Repository
 
-A MERN app for interview preparation with AI feedback.
+> A dedicated space to track daily coding practice, interview prep, and learning journey for placements.
 
-## Features
-- Authentication with email verification and password reset.
-- Dashboard with general and company-specific prep.
-- MCQ practice with scores and explanations.
-- Coding practice with Monaco Editor and Judge0 execution.
-- Interview Q&A with Gemini AI feedback.
-- Progress tracking with Recharts.
-- Admin panel for managing questions.
+## 🚀 Overview
 
-## Setup Locally
+This repository contains my daily preparation for placement drives including:
 
-1. Clone the repo.
-2. Backend:
-   - cd backend
-   - npm install
-   - Copy .env.example to .env and fill: MONGO_URI, JWT_SECRET, GMAIL_USER, GMAIL_APP_PASS, GEMINI_API_KEY, RAPIDAPI_KEY.
-   - node seed.js (seed sample data)
-   - npm run dev (runs on port 5000)
-3. Frontend:
-   - cd frontend
-   - npm install
-   - npm run dev (runs on port 5173)
-4. Open http://localhost:5173/login
+* ✅ Data Structures & Algorithms practice
+* ✅ Competitive programming questions
+* ✅ System Design & CS core concepts
+* ✅ Aptitude & reasoning notes
+* ✅ Interview preparation resources
 
-## Deployment
-- Frontend: Vercel - Import Git repo, set framework preset to Vite.
-- Backend: Render - New web service, Node, build: npm install, start: npm start, add env vars.
-- Ensure backend URL in frontend axios baseURL (update in src/utils/api.js or env).
+The goal is to stay consistent and push at least one problem/learning update every day.
 
-## Notes
-- For Judge0, language IDs: JS=63, Python=71 (add more as needed).
-- Free tiers have limits; monitor usage.
-- Admin user: Manually set role to 'admin' in MongoDB or create via signup and update.
+## 🧠 Learning Objectives
+
+* Strengthen problem‑solving skills
+* Improve time & space complexity understanding
+* Build consistency in daily coding
+* Prepare for top IT companies like TCS, Infosys, Cognizant etc.
+
+## 🗂️ Repository Structure
+
+```
+Job_preparation/
+│
+├── DSA/
+│   ├── Arrays
+│   ├── Strings
+│   ├── LinkedList
+│   ├── etc...
+│
+├── Aptitude/
+├── Notes/
+└── README.md
+```
+
+## 🛠️ Tech & Platforms Used
+
+* LeetCode / CodeStudio / GFG
+* C++ / JavaScript
+* Git & GitHub for tracking progress
+
+## 📅 Daily Commit Habit
+
+> "One question a day keeps unemployment away 😄"
+
+* Date‑wise commits
+* Problem link + solution
+* Explanation and notes
+
+## 📸 Screenshots
+
+> Here are example placeholders — replace them with your actual screenshots
+
+| DSA Folder View                     | Aptitude Notes                                |
+| ----------------------------------- | --------------------------------------------- |
+| ![DSA Screenshot](./assets/dsa.png) | ![Aptitude Screenshot](./assets/aptitude.png) |
+
+| Notes Section                           | Daily Commit History                        |
+| --------------------------------------- | ------------------------------------------- |
+| ![Notes Screenshot](./assets/notes.png) | ![Commits Screenshot](./assets/commits.png) |
+
+> Place your screenshot files in an `assets/` folder and rename the above links accordingly.
+
+## 🤝 Contributions
+
+This repo is mainly for personal tracking, but feel free to:
+
+* ⭐ Star the repository
+* 📨 Suggest improvements
+* 🔁 Fork and follow the same journey
+
+## 💡 Future Enhancements
+
+* Add topic‑wise progress chart
+* Create README badges for streak
+* Add solution explanations in detail
+
+## 📫 Contact
+
+If you want to discuss DSA / Placements / Projects:
+
+* LinkedIn: *www.linkedin.com/in/sonujatav*
+* Email: *sonuj22661@gmail.com*
+
+---
+
+### 🎯 Stay consistent. Stay sharp. Crack the placement!
