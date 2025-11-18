@@ -128,7 +128,8 @@ npm start
 
 ## 📸 Screenshots
 
-(Add UI screenshots here if needed)
+![Combined Screenshots](https://raw.githubusercontent.com/sonux-jatav/Job_preparation/1fccf77247e71ba388a1c1bd8536cf9522b51e9b/all_screens_combined.png)
+
 
 ---
 
