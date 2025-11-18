@@ -1,78 +1,159 @@
-# Job Preparation Repository
+# Job Preparation Platform
 
-> A dedicated space to track daily coding practice, interview prep, and learning journey for placements.
-
-## 🚀 Overview
-
-This repository contains my daily preparation for placement drives including:
-
-* ✅ Data Structures & Algorithms practice
-* ✅ Competitive programming questions
-* ✅ System Design & CS core concepts
-* ✅ Aptitude & reasoning notes
-* ✅ Interview preparation resources
-
-The goal is to stay consistent and push at least one problem/learning update every day.
-
-## 🧠 Learning Objectives
-
-* Strengthen problem‑solving skills
-* Improve time & space complexity understanding
-* Build consistency in daily coding
-* Prepare for top IT companies like TCS, Infosys, Cognizant etc.
-
-## 🗂️ Repository Structure
-
-```
-Job_preparation/
-│
-├── DSA/
-│   ├── Arrays
-│   ├── Strings
-│   ├── LinkedList
-│   ├── etc...
-│
-├── Aptitude/
-├── Notes/
-└── README.md
-```
-
-## 🛠️ Tech & Platforms Used
-
-* LeetCode / CodeStudio / GFG
-* C++ / JavaScript
-* Git & GitHub for tracking progress
-
-## 📅 Daily Commit Habit
-
-> "One question a day keeps unemployment away 😄"
-
-* Date‑wise commits
-* Problem link + solution
-* Explanation and notes
-
-* 
-## 🤝 Contributions
-
-This repo is mainly for personal tracking, but feel free to:
-
-* ⭐ Star the repository
-* 📨 Suggest improvements
-* 🔁 Fork and follow the same journey
-
-## 💡 Future Enhancements
-
-* Add topic‑wise progress chart
-* Create README badges for streak
-* Add solution explanations in detail
-
-## 📫 Contact
-
-If you want to discuss DSA / Placements / Projects:
-
-* LinkedIn: *www.linkedin.com/in/sonujatav*
-* Email: *sonuj22661@gmail.com*
+A full-stack MERN application designed to help students prepare effectively for campus placements through structured learning, quizzes, interview prep, and progress tracking.
 
 ---
 
-### 🎯 Stay consistent. Stay sharp. Crack the placement!
+## 🚀 Live Demo
+
+🔗 **Live Link:** [https://job-preparation-3d91.onrender.com](https://job-preparation-3d91.onrender.com)
+
+---
+
+## 📌 Overview
+
+This platform centralizes all essential placement preparation resources — including aptitude, reasoning, verbal ability, DSA practice, quizzes, interview guidance, and more. It is designed to provide a smooth and structured preparation experience for students targeting companies like TCS, Infosys, and Cognizant.
+
+---
+
+## ✨ Features
+
+### 🎯 Student-Focused Learning Tools
+
+* Topic-wise **Aptitude**, **Reasoning**, and **Verbal Ability** practice
+* **DSA learning modules** with examples and explanations
+* **Interview preparation** including HR and Technical questions
+* **Progress tracking** for motivation and goal setting
+
+### 📊 Quizzes & Practice Tests
+
+* Multiple difficulty levels
+* Timer-based quiz environment
+* Instant score and solution breakdown
+
+### 👤 User System & Personalization
+
+* Secure **Login/Signup**
+* Personalized dashboard
+* Marks/quiz scores tracking
+
+### 🖥️ Smooth UI/UX
+
+* Responsive design
+* Clean layout for distraction-free learning
+
+---
+
+## 🛠️ Tech Stack
+
+### **Frontend:**
+
+* React.js
+* Redux Toolkit
+* Tailwind CSS / CSS Modules
+
+### **Backend:**
+
+* Node.js
+* Express.js
+
+### **Database:**
+
+* MongoDB (Mongoose ORM)
+
+### **Deployment:**
+
+* Render (Backend & Frontend)
+
+---
+
+## 📁 Project Structure
+
+```
+Job_preparation/
+├── client/        # React frontend
+├── server/        # Node/Express backend
+├── models/        # MongoDB models
+├── routes/        # API routes
+└── README.md      # Documentation
+```
+
+---
+
+## ⚙️ Installation & Setup
+
+### 1. Clone the Repository
+
+```
+ git clone https://github.com/sonux-jatav/Job_preparation.git
+```
+
+### 2. Install Dependencies
+
+#### For Client
+
+```
+ cd client
+ npm install
+```
+
+#### For Server
+
+```
+ cd server
+ npm install
+```
+
+### 3. Add Environment Variables
+
+Create a `.env` file in the **server** folder and add:
+
+```
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+```
+
+### 4. Run the Application
+
+```
+# Start server
+cd server
+npm start
+
+# Start client\ ncd client
+npm start
+```
+
+---
+
+## 📸 Screenshots
+
+(Add UI screenshots here if needed)
+
+---
+
+## 📈 Future Enhancements
+
+* AI-based resume builder
+* Coding IDE integration for practicing DSA
+* Company-specific interview kits
+* Weekly leaderboard and challenges
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Feel free to open an issue or submit a pull request.
+
+---
+
+## 🧑‍💻 Author
+
+**Sonu Jatav**
+GitHub: [https://github.com/sonux-jatav](https://github.com/sonux-jatav)
+
+---
+
+## ⭐ Support
+
+If you like this project, **consider giving it a star ⭐ on GitHub!**
