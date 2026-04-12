@@ -1,7 +1,6 @@
-// backend/controllers/mcqController.js
-const Mcq = require('../models/Mcq');
+import Mcq from '../models/Mcq.js';
 
-exports.getMcqs = async (req, res) => {
+export const getMcqs = async (req, res) => {
   try {
     const { companyTag } = req.query;
     const filter = companyTag ? { companyTag } : {};
@@ -13,7 +12,7 @@ exports.getMcqs = async (req, res) => {
   }
 };
 
-exports.submitMcq = async (req, res) => {
+export const submitMcq = async (req, res) => {
   try {
     const { answers } = req.body;
     if (!req.userId) throw new Error('User not authenticated');
@@ -32,7 +31,7 @@ exports.submitMcq = async (req, res) => {
         correct: mcq.correctAnswer,
         yourAnswer: userAnswer || 'Not answered',
         explanation: mcq.explanation,
-        correct: isCorrect,
+        isCorrect: isCorrect,
       };
     });
 

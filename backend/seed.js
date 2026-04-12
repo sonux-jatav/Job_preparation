@@ -1,11 +1,12 @@
 // backend/seed.js
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+
 dotenv.config();
 
-const Mcq = require('./models/Mcq');
-const CodingProblem = require('./models/CodingProblem');
-const InterviewQuestion = require('./models/InterviewQuestion');
+import Mcq from './models/Mcq.js';
+import CodingProblem from './models/CodingProblem.js';
+import InterviewQuestion from './models/InterviewQuestion.js';
 
 const mcqData = [
    { question: 'Primary key in DBMS is?', options: ['a) Unique and not null', 'b) Can be null', 'c) Duplicates allowed'], correctAnswer: 'a) Unique and not null', explanation: 'Primary key uniquely identifies each record.', companyTag: '' },

@@ -1,8 +1,8 @@
-const Mcq = require('../models/Mcq');
-const CodingProblem = require('../models/CodingProblem');
-const InterviewQuestion = require('../models/InterviewQuestion');
+import Mcq from '../models/Mcq.js';
+import CodingProblem from '../models/CodingProblem.js';
+import InterviewQuestion from '../models/InterviewQuestion.js';
 
-exports.addMcq = async (req, res) => {
+export const addMcq = async (req, res) => {
   try {
     const mcq = new Mcq(req.body);
     await mcq.save();
@@ -12,7 +12,7 @@ exports.addMcq = async (req, res) => {
   }
 };
 
-exports.editMcq = async (req, res) => {
+export const editMcq = async (req, res) => {
   try {
     const { id } = req.params;
     const mcq = await Mcq.findByIdAndUpdate(id, req.body, { new: true });
@@ -22,7 +22,7 @@ exports.editMcq = async (req, res) => {
   }
 };
 
-exports.deleteMcq = async (req, res) => {
+export const deleteMcq = async (req, res) => {
   try {
     const { id } = req.params;
     await Mcq.findByIdAndDelete(id);
@@ -32,8 +32,7 @@ exports.deleteMcq = async (req, res) => {
   }
 };
 
-// Similar functions for coding and interview: addCoding, editCoding, deleteCoding, addInterview, etc.
-exports.addCoding = async (req, res) => {
+export const addCoding = async (req, res) => {
   try {
     const problem = new CodingProblem(req.body);
     await problem.save();
@@ -43,7 +42,7 @@ exports.addCoding = async (req, res) => {
   }
 };
 
-exports.editCoding = async (req, res) => {
+export const editCoding = async (req, res) => {
   try {
     const { id } = req.params;
     const problem = await CodingProblem.findByIdAndUpdate(id, req.body, { new: true });
@@ -53,7 +52,7 @@ exports.editCoding = async (req, res) => {
   }
 };
 
-exports.deleteCoding = async (req, res) => {
+export const deleteCoding = async (req, res) => {
   try {
     const { id } = req.params;
     await CodingProblem.findByIdAndDelete(id);
@@ -63,7 +62,7 @@ exports.deleteCoding = async (req, res) => {
   }
 };
 
-exports.addInterview = async (req, res) => {
+export const addInterview = async (req, res) => {
   try {
     const question = new InterviewQuestion(req.body);
     await question.save();
@@ -73,7 +72,7 @@ exports.addInterview = async (req, res) => {
   }
 };
 
-exports.editInterview = async (req, res) => {
+export const editInterview = async (req, res) => {
   try {
     const { id } = req.params;
     const question = await InterviewQuestion.findByIdAndUpdate(id, req.body, { new: true });
@@ -83,7 +82,7 @@ exports.editInterview = async (req, res) => {
   }
 };
 
-exports.deleteInterview = async (req, res) => {
+export const deleteInterview = async (req, res) => {
   try {
     const { id } = req.params;
     await InterviewQuestion.findByIdAndDelete(id);

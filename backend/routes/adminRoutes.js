@@ -1,7 +1,8 @@
-const express = require('express');
+import express from 'express';
+import { protect, admin } from '../middleware/authMiddleware.js';
+import * as adminController from '../controllers/adminController.js';
+
 const router = express.Router();
-const { protect, admin } = require('../middleware/authMiddleware');
-const adminController = require('../controllers/adminController');
 
 router.post('/mcq', protect, admin, adminController.addMcq);
 router.put('/mcq/:id', protect, admin, adminController.editMcq);
@@ -15,4 +16,4 @@ router.post('/interview', protect, admin, adminController.addInterview);
 router.put('/interview/:id', protect, admin, adminController.editInterview);
 router.delete('/interview/:id', protect, admin, adminController.deleteInterview);
 
-module.exports = router;
+export default router;

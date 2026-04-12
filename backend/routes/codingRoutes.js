@@ -1,10 +1,10 @@
-// backend/routes/codingRoutes.js
-const express = require('express');
-const router = express.Router();
-const { protect } = require('../middleware/authMiddleware');
-const codingController = require('../controllers/codingController');
+import express from 'express';
+import { protect } from '../middleware/authMiddleware.js';
+import * as codingController from '../controllers/codingController.js';
 
-router.get('/', protect, codingController.getCodingProblems); // Changed to '/'
+const router = express.Router();
+
+router.get('/', protect, codingController.getCodingProblems);
 router.post('/submit', protect, codingController.submitCode);
 
-module.exports = router;
+export default router;

@@ -1,4 +1,3 @@
-// frontend/src/component/companyPage.jsx
 import { useParams, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -15,8 +14,8 @@ const CompanyPage = () => {
   const [answers, setAnswers] = useState({});
   const [results, setResults] = useState({});
   const [selectedCategory, setSelectedCategory] = useState('coding');
-  const [code, setCode] = useState('// Write code here'); // Code state globally
-  const [languageId, setLanguageId] = useState(63); // LanguageId globally, default to JS
+  const [code, setCode] = useState('// Write code here');
+  const [languageId, setLanguageId] = useState(63);
 
   useEffect(() => {
     if (!token) return navigate('/login');
@@ -28,10 +27,9 @@ const CompanyPage = () => {
 
     axios
       .get(`${endpoint}?companyTag=${company}`, headers)
-      .then((res) => setItems(res.data))
+      .then((res) => setItems(res.data || [])) // ✅ safe
       .catch((err) => {
         if (err.response?.status === 401) dispatch(logout());
-        console.error('Fetch error:', err);
       });
   }, [company, token, navigate, dispatch, selectedCategory]);
 
@@ -45,30 +43,20 @@ const CompanyPage = () => {
 
     if (selectedCategory === 'coding') {
       if (!code.trim()) return alert('Please write code');
-      try {
-        const res = await axios.post(
-          '/api/coding/submit',
-          { problemId: itemId, code, languageId },
-          { headers: { Authorization: `Bearer ${token}` } }
-        );
-        setResults((prev) => ({ ...prev, [itemId]: res.data }));
-      } catch (err) {
-        console.error('Submit error:', err.response?.data?.error || err.message);
-        alert('Submission failed: ' + (err.response?.data?.error || 'Server error'));
-      }
+      const res = await axios.post(
+        '/api/coding/submit',
+        { problemId: itemId, code, languageId },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      setResults((prev) => ({ ...prev, [itemId]: res.data }));
     } else if (selectedCategory === 'mcq') {
       if (!answers[itemId]) return alert('Please select an answer');
-      try {
-        const res = await axios.post(
-          '/api/mcq/submit',
-          { answers: [{ id: itemId, selected: answers[itemId] }] },
-          { headers: { Authorization: `Bearer ${token}` } }
-        );
-        setResults((prev) => ({ ...prev, [itemId]: res.data }));
-      } catch (err) {
-        console.error('Submit error:', err.response?.data?.error || err.message);
-        alert('Submission failed: ' + (err.response?.data?.error || 'Server error'));
-      }
+      const res = await axios.post(
+        '/api/mcq/submit',
+        { answers: [{ id: itemId, selected: answers[itemId] }] },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      setResults((prev) => ({ ...prev, [itemId]: res.data }));
     }
   };
 
@@ -79,137 +67,134 @@ const CompanyPage = () => {
   ];
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
-      <h1 className="text-4xl font-bold text-gray-800 mb-6">{company} Preparation</h1>
-      <select
-        value={selectedCategory}
-        onChange={(e) => {
-          setSelectedCategory(e.target.value);
-          setAnswers({});
-          setResults({});
-          setCode('// Write code here'); // Reset code on category change
-          setLanguageId(63); // Reset languageId on category change
-        }}
-        className="w-full p-3 mb-6 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-      >
-        {categories.map((cat) => (
-          <option key={cat.id} value={cat.id} className="p-2">
-            {cat.name}
-          </option>
-        ))}
-      </select>
-      {items.length === 0 ? (
-        <p className="text-gray-600">No {selectedCategory === 'mcq' ? 'MCQs' : selectedCategory === 'interview' ? 'interview questions' : 'coding problems'} available.</p>
-      ) : selectedCategory === 'coding' ? (
-        <div className="mb-6">
-          {items.map((item) => (
-            <div key={item._id} className="mb-6 p-4 border rounded-lg shadow-md">
-              <h2 className="text-xl font-semibold text-gray-800 mb-2">{item.title}</h2>
-              <p className="text-gray-600 mb-2">{item.description}</p>
-              <h3 className="text-lg font-medium text-gray-700 mb-2">Examples:</h3>
-              {item.examples?.map((ex, idx) => (
-                <div key={idx} className="mb-2 text-gray-600">
-                  <p>Input: {ex.input}</p>
-                  <p>Output: {ex.output}</p>
-                </div>
-              ))}
+    <div className="min-h-screen bg-gradient-to-br from-[#14001f] via-[#2a003f] to-black text-white p-6">
+
+      <div className="max-w-5xl mx-auto backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl p-6 shadow-2xl">
+
+        <h1 className="text-3xl font-semibold mb-6">{company} Preparation</h1>
+
+        <select
+          value={selectedCategory}
+          onChange={(e) => {
+            setSelectedCategory(e.target.value);
+            setAnswers({});
+            setResults({});
+            setCode('// Write code here');
+            setLanguageId(63);
+          }}
+          className="w-full p-3 mb-6 rounded-lg bg-white/10 border border-white/20 text-white"
+        >
+          {categories.map((cat) => (
+            <option key={cat.id} value={cat.id} className="text-black">
+              {cat.name}
+            </option>
+          ))}
+        </select>
+
+        {items.length === 0 ? (
+          <p>No content available.</p>
+        ) : selectedCategory === 'coding' ? (
+          items.map((item) => (
+            <div key={item._id} className="mb-6 p-4 rounded-xl bg-white/5 border border-white/10">
+
+              <h2 className="text-xl mb-2">{item.title}</h2>
+              <p className="text-gray-300 mb-2">{item.description}</p>
+
               <select
                 value={languageId}
                 onChange={(e) => setLanguageId(Number(e.target.value))}
-                className="w-full p-2 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-2 mb-4 rounded bg-white/10"
               >
                 <option value={63}>JavaScript</option>
                 <option value={71}>Python</option>
                 <option value={54}>C++</option>
               </select>
+
               <Editor
                 height="30vh"
                 language={languageId === 63 ? 'javascript' : languageId === 71 ? 'python' : 'cpp'}
                 value={code}
                 onChange={(value) => setCode(value || '')}
                 theme="vs-dark"
-                className="mb-4"
               />
+
               <button
                 onClick={() => handleSubmit(item._id)}
-                className="bg-green-600 text-white p-2 rounded-lg hover:bg-green-700 transition duration-200"
-                disabled={!code.trim()}
+                className="mt-4 px-6 py-2 rounded bg-gradient-to-r from-pink-600 to-red-500"
               >
                 Submit
               </button>
-              {results[item._id] && (
-                <div className="mt-4 p-2 border rounded bg-gray-50">
-                  <p className="text-lg font-medium text-gray-800">Result: {results[item._id].result}</p>
-                  {results[item._id].details.map((det, idx) => (
-                    <div key={idx} className="p-2 border mt-2 rounded-lg">
-                      <p className="text-gray-600">Test Input: {det.testInput}</p>
-                      <p className="text-gray-600">Output: {det.output}</p>
-                      <p className="text-gray-600">Stderr: {det.stderr}</p>
-                      <p className="text-gray-600">Status: {det.status}</p>
-                      <p className={det.status.includes('Accepted') ? 'text-green-600' : 'text-red-600'}>
-                        {det.status.includes('Accepted') ? 'Passed' : 'Failed'}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              )}
+
             </div>
-          ))}
-        </div>
-      ) : selectedCategory === 'mcq' ? (
-        <div className="mb-6">
-          {items.map((item) => (
-            <div key={item._id} className="mb-6 p-4 border rounded-lg shadow-md">
-              <h2 className="text-xl font-semibold text-gray-800 mb-2">{item.question}</h2>
-              {item.options?.map((opt, idx) => (
-                <label key={idx} className="block mb-1">
-                  <input
-                    type="radio"
-                    name={item._id}
-                    value={opt}
-                    onChange={(e) => handleSelect(item._id, e.target.value)}
-                    checked={answers[item._id] === opt}
-                    className="mr-2"
-                  />
-                  {opt}
-                </label>
-              ))}
+          ))
+        ) : selectedCategory === 'mcq' ? (
+          items.map((item) => (
+            <div key={item._id} className="mb-6 p-4 rounded-xl bg-white/5 border border-white/10">
+
+              <h2 className="mb-4">{item.question || "No question available"}</h2>
+
+              {/* ✅ FIXED */}
+              <div className="grid gap-3">
+                {(Array.isArray(item.options) ? item.options : []).map((opt, idx) => (
+                  <label
+                    key={idx}
+                    className={`p-3 rounded border cursor-pointer 
+                      ${answers[item._id] === opt ? 'bg-purple-600' : 'bg-white/5'}`}
+                  >
+                    <input
+                      type="radio"
+                      name={item._id}
+                      value={opt}
+                      onChange={(e) => handleSelect(item._id, e.target.value)}
+                      checked={answers[item._id] === opt}
+                      className="hidden"
+                    />
+                    {opt}
+                  </label>
+                ))}
+              </div>
+
+              {!item.options && (
+                <p className="text-red-400 text-sm mt-2">Options not available</p>
+              )}
+
               <button
                 onClick={() => handleSubmit(item._id)}
-                className="bg-green-600 text-white p-2 rounded-lg hover:bg-green-700 transition duration-200 mt-2"
+                className="mt-4 px-6 py-2 rounded bg-gradient-to-r from-pink-600 to-red-500"
                 disabled={!answers[item._id]}
               >
                 Submit
               </button>
+
+              {/* ✅ RESULT SAFE */}
               {results[item._id] && (
-                <div className="mt-4 p-2 border rounded bg-gray-50">
-                  <p className="text-lg font-medium text-gray-800">Score: {results[item._id].score}/{results[item._id].total}</p>
-                  {results[item._id].explanations.map((exp, idx) => (
-                    <div key={idx} className="mt-2">
-                      <p className="text-gray-600">Correct: {exp.correct}</p>
-                      <p className="text-gray-600">Your Answer: {exp.yourAnswer}</p>
-                      <p className="text-gray-600">Explanation: {exp.explanation}</p>
-                      <p className={exp.correct ? 'text-green-600' : 'text-red-600'}>
-                        {exp.correct ? 'Correct!' : 'Wrong!'}
-                      </p>
+                <div className="mt-4 p-3 rounded-lg bg-black/30 border border-white/10 text-sm">
+                  <p>
+                    Score: {results[item._id]?.score}/{results[item._id]?.total}
+                  </p>
+
+                  {(results[item._id]?.explanations || []).map((exp, idx) => (
+                    <div key={idx}>
+                      <p>Correct: {exp?.correct}</p>
+                      <p>Your: {exp?.yourAnswer}</p>
+                      <p>{exp?.explanation}</p>
                     </div>
                   ))}
                 </div>
               )}
+
             </div>
-          ))}
-        </div>
-      ) : selectedCategory === 'interview' ? (
-        <div className="mb-6">
-          {items.map((item) => (
-            <div key={item._id} className="mb-6 p-4 border rounded-lg shadow-md">
-              <h2 className="text-xl font-semibold text-gray-800 mb-2">{item.question}</h2>
-              <p className="text-gray-600 mb-2">Type: {item.type}</p>
-              {/* Placeholder for interview prep */}
+          ))
+        ) : (
+          items.map((item) => (
+            <div key={item._id} className="mb-6 p-4 rounded-xl bg-white/5 border border-white/10">
+              <h2>{item.question}</h2>
+              <p className="text-gray-400">Type: {item.type}</p>
             </div>
-          ))}
-        </div>
-      ) : null}
+          ))
+        )}
+
+      </div>
     </div>
   );
 };

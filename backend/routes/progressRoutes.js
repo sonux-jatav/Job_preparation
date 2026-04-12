@@ -1,8 +1,9 @@
-const express = require('express');
+import express from 'express';
+import { protect } from '../middleware/authMiddleware.js';
+import * as progressController from '../controllers/progressController.js';
+
 const router = express.Router();
-const { protect } = require('../middleware/authMiddleware');
-const progressController = require('../controllers/progressController');
 
 router.get('/', protect, progressController.getProgress);
 
-module.exports = router;
+export default router;

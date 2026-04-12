@@ -1,5 +1,4 @@
-// backend/models/User.js
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema({
   name: String,
@@ -7,9 +6,9 @@ const userSchema = new mongoose.Schema({
   passwordHash: String,
   role: { type: String, default: 'user' },
   progress: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Submission' }],
-  isVerified: { type: Boolean, default: true }, // Default true kar diya
+  isVerified: { type: Boolean, default: true },
   resetToken: String,
   resetTokenExpiry: Date
 });
 
-module.exports = mongoose.model('User', userSchema);
+export default mongoose.model('User', userSchema);

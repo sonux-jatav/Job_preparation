@@ -1,22 +1,21 @@
-// backend/controllers/codingController.js
-const CodingProblem = require('../models/CodingProblem');
-const Submission = require('../models/Submission');
-const User = require('../models/User');
-const axios = require('axios');
+import CodingProblem from '../models/CodingProblem.js';
+import Submission from '../models/Submission.js';
+import User from '../models/User.js';
+import axios from 'axios';
 
-exports.getCodingProblems = async (req, res) => {
+export const getCodingProblems = async (req, res) => {
   try {
     const { companyTag } = req.query;
     const filter = companyTag ? { companyTag } : {};
     const problems = await CodingProblem.find(filter);
-    res.json(problems.length ? problems : []); // Return empty array if no data
+    res.json(problems.length ? problems : []);
   } catch (err) {
     console.error('Get coding problems error:', err.stack);
     res.status(500).json({ error: err.message });
   }
 };
 
-exports.submitCode = async (req, res) => {
+export const submitCode = async (req, res) => {
   try {
     const { problemId, code, languageId } = req.body;
     if (!req.userId) throw new Error('User not authenticated');

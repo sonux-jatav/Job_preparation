@@ -1,10 +1,10 @@
-// backend/routes/mcqRoutes.js
-const express = require('express');
+import express from 'express';
+import { protect } from '../middleware/authMiddleware.js';
+import * as mcqController from '../controllers/mcqController.js';
+
 const router = express.Router();
-const { protect } = require('../middleware/authMiddleware');
-const mcqController = require('../controllers/mcqController');
 
 router.get('/', protect, mcqController.getMcqs);
 router.post('/submit', protect, mcqController.submitMcq);
 
-module.exports = router;
+export default router;

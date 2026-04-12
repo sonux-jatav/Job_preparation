@@ -1,9 +1,9 @@
-const InterviewQuestion = require('../models/InterviewQuestion');
-const Submission = require('../models/Submission');
-const User = require('../models/User');
-const { GoogleGenerativeAI } = require('@google/generative-ai');
+import InterviewQuestion from '../models/InterviewQuestion.js';
+import Submission from '../models/Submission.js';
+import User from '../models/User.js';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 
-exports.getInterviewQuestions = async (req, res) => {
+export const getInterviewQuestions = async (req, res) => {
   try {
     const { companyTag } = req.query;
     const filter = companyTag ? { companyTag } : {};
@@ -14,7 +14,7 @@ exports.getInterviewQuestions = async (req, res) => {
   }
 };
 
-exports.submitAnswer = async (req, res) => {
+export const submitAnswer = async (req, res) => {
   try {
     const { questionId, answer } = req.body;
     const userId = req.userId;

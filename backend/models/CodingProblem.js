@@ -1,5 +1,4 @@
-// backend/models/CodingProblem.js
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const codingSchema = new mongoose.Schema({
   title: String,
@@ -9,4 +8,4 @@ const codingSchema = new mongoose.Schema({
   companyTag: String,
 });
 
-module.exports = mongoose.model('CodingProblem', codingSchema);
+export default mongoose.model('CodingProblem', codingSchema);

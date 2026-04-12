@@ -1,6 +1,6 @@
-const Submission = require('../models/Submission');
+import Submission from '../models/Submission.js';
 
-exports.getProgress = async (req, res) => {
+export const getProgress = async (req, res) => {
   try {
     const userId = req.userId;
     const submissions = await Submission.find({ userId }).sort({ timestamp: -1 });

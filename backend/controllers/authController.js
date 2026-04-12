@@ -1,11 +1,9 @@
-// backend/controllers/authController.js
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const nodemailer = require('nodemailer');
-const crypto = require('crypto');
-const User = require('../models/User');
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import nodemailer from 'nodemailer';
+import crypto from 'crypto';
+import User from '../models/User.js';
 
-// Nodemailer transporter (ab use nahi hoga, lekin rakh rahe hain agar future mein chahiye)
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -14,7 +12,7 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-exports.signup = async (req, res) => {
+export const signup = async (req, res) => {
   try {
     const { name, email, password } = req.body;
     console.log('Signup request received:', { name, email, password });
@@ -37,22 +35,10 @@ exports.signup = async (req, res) => {
   }
 };
 
-// Verify function ab zaruri nahi, isliye comment kar rahe hain (future use ke liye rakhen)
-exports.verify = async (req, res) => {
-  // try {
-  //   const { token } = req.params;
-  //   const decoded = jwt.verify(token, process.env.JWT_SECRET);
-  //   const user = await User.findById(decoded.userId);
-  //   if (!user) return res.status(400).json({ error: 'Invalid token' });
-  //   user.isVerified = true;
-  //   await user.save();
-  //   res.json({ message: 'Email verified' });
-  // } catch (err) {
-  //   res.status(400).json({ error: 'Invalid or expired token' });
-  // };
+export const verify = async (req, res) => {
 };
 
-exports.login = async (req, res) => {
+export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
     console.log('Login attempt for email:', email);
@@ -66,7 +52,6 @@ exports.login = async (req, res) => {
       console.log('Password mismatch for email:', email);
       return res.status(401).json({ error: 'Invalid credentials' });
     }
-    // isVerified check hata diya
     const token = jwt.sign({ userId: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1d' });
     console.log('Login successful for:', email);
     res.json({ token, role: user.role });
@@ -76,7 +61,7 @@ exports.login = async (req, res) => {
   }
 };
 
-exports.forgotPassword = async (req, res) => {
+export const forgotPassword = async (req, res) => {
   try {
     const { email } = req.body;
     const user = await User.findOne({ email });
@@ -98,7 +83,7 @@ exports.forgotPassword = async (req, res) => {
   }
 };
 
-exports.resetPassword = async (req, res) => {
+export const resetPassword = async (req, res) => {
   try {
     const { token } = req.params;
     const { password } = req.body;
